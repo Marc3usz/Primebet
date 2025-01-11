@@ -26,7 +26,7 @@ export const Navbar = () => {
 
     return (
         <div className="h-[10%] bg-slate-800 flex text-slate-100 justify-end">
-            <div className="flex w-[70%] flex-row justify-evenly">
+            <div className="flex w-[80%] flex-row justify-evenly">
                 {/* <Logo /> */}
                 <button onClick={() => nav(Links.HOMEPAGE)}>Home</button>
                 <button onClick={() => nav(Links.BETS)}>My Bets</button>

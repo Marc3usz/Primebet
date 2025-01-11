@@ -5,14 +5,18 @@ import { Modals } from "../constants/modals";
 export interface UserData {
     modal: Modals;
     setModal: (modal: Modals) => void;
+    loggedIn: boolean;
+    setLoggedIn: (loggedIn: boolean) => void;
 }
 
 export const userData = create<UserData>()(
     persist(
-    (   set, get) => ({
+        (set, get) => ({
             modal: Modals.NONE,
-            setModal: (modal: Modals) => set({ ...get(), modal: modal })
-     }),
+            setModal: (modal: Modals) => set({ ...get(), modal: modal }),
+            loggedIn: false,
+            setLoggedIn: (loggedIn: boolean) => set({ ...get(), loggedIn: loggedIn })
+        }),
         {
             name: 'PRIMEBET::USER-DATA',
             storage: createJSONStorage(() => sessionStorage)

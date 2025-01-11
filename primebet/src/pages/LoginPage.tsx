@@ -4,11 +4,16 @@ import { userData } from "../stores/store";
 import { Modals } from "../constants/modals";
 import Register from "../components/modals/Register";
 import ForgotPass from "../components/modals/ForgotPass";
+import { auth } from "../firebase/firebase.config";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 export const LoginPage: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const { modal, setModal } = userData();
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   useEffect(() => {
     const modalParam = searchParams.get("modal");
@@ -20,6 +25,17 @@ export const LoginPage: React.FC = () => {
       setIsModalVisible(false);
     }
   }, [searchParams, setModal]);
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError("");
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      alert("Logged in successfully!");
+    } catch (err) {
+      setError("Failed to log in. Please check your email and password.");
+    }
+  };
 
   const openModal = (targetModal: Modals) => {
     setModal(targetModal);
@@ -40,13 +56,15 @@ export const LoginPage: React.FC = () => {
     <div className="h-screen flex flex-col items-center justify-center bg-gray-900 text-white">
       <div className="p-6 bg-gray-800 rounded-lg shadow-lg w-[400px]">
         <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
-        <form className="flex flex-col gap-4">
+        <form className="flex flex-col gap-4" onSubmit={handleLogin}>
           <div>
             <label className="block text-sm font-medium mb-1">Email</label>
             <input
               type="email"
               placeholder="Enter your email"
               className="w-full px-3 py-2 border border-gray-600 rounded bg-gray-700 text-white focus:outline-none focus:ring focus:ring-blue-500"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               required
             />
           </div>
@@ -56,9 +74,12 @@ export const LoginPage: React.FC = () => {
               type="password"
               placeholder="Enter your password"
               className="w-full px-3 py-2 border border-gray-600 rounded bg-gray-700 text-white focus:outline-none focus:ring focus:ring-blue-500"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               required
             />
           </div>
+          {error && <p className="text-red-500 text-sm">{error}</p>}
           <button
             type="submit"
             className="w-full py-2 bg-blue-600 hover:bg-blue-700 rounded text-white font-bold"

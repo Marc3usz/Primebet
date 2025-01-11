@@ -10,7 +10,7 @@ export const Homepage = () => {
     return (
         <div className="w-screen h-screen">
             <Navbar />
-            <div>
+            <div className="flex flex-row w-full h-full">
                 <Sidebar />
                 <Outlet />
             </div>

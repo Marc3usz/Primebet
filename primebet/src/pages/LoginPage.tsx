@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { userData } from "../stores/store";
 import { Modals } from "../constants/modals";
 import Register from "../components/modals/Register";
 import ForgotPass from "../components/modals/ForgotPass";
 import { auth } from "../firebase/firebase.config";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { Links } from "../constants/links";
 
 export const LoginPage: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -14,6 +15,7 @@ export const LoginPage: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const nav = useNavigate();
 
   useEffect(() => {
     const modalParam = searchParams.get("modal");
@@ -32,6 +34,7 @@ export const LoginPage: React.FC = () => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
       alert("Logged in successfully!");
+      nav(Links.HOMEPAGE);
     } catch (err) {
       setError("Failed to log in. Please check your email and password.");
     }

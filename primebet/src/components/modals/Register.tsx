@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import { auth } from "../../firebase/firebase.config";
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+import { Links } from "../../constants/links";
 
 const Register: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
+  const nav = useNavigate();
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -16,6 +19,7 @@ const Register: React.FC = () => {
     try {
       await createUserWithEmailAndPassword(auth, email, password);
       setSuccess(true);
+      nav(Links.HOMEPAGE);
     } catch (err: any) {
       setError(err.message || "Failed to register. Please try again.");
     }

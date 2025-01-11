@@ -3,6 +3,8 @@ import { Links } from "../constants/links";
 import { useStore } from "zustand";
 import { userData } from "../stores/store";
 import { useEffect, useState } from "react";
+import { signOut } from "firebase/auth";
+import { auth } from "../firebase/firebase.config";
 
 export const Navbar = () => {
     const nav = useNavigate();
@@ -14,7 +16,7 @@ export const Navbar = () => {
         if (liveUserData.loggedIn) {
             setLoginSignout("Sign Out")
             setLoginSignoutFN(
-                () => () => {console.log("wylogowano"); liveUserData.setLoggedIn(false)}
+                () => async () => {console.log("wylogowano"); liveUserData.setLoggedIn(false); await signOut(auth)}
             )
         } else {
             setLoginSignout("Log In")
@@ -31,6 +33,7 @@ export const Navbar = () => {
                 <button onClick={() => nav(Links.HOMEPAGE)} className="bg-slate-700 rounded-md h-fit p-2 w-fit">Home</button>
                 <button onClick={() => nav(Links.BETS)} className="bg-slate-700 rounded-md h-fit p-2 w-fit">My Bets</button>
                 <button onClick={loginSignoutFN} className="bg-slate-700 rounded-md h-fit p-2 w-fit">{loginSignout}</button>
+                {liveUserData.loggedIn ? <h1>{liveUserData.user?.email}</h1> : null}
             </div>
         </div>
     );

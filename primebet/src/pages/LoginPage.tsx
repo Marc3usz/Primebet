@@ -21,9 +21,6 @@ export const LoginPage: React.FC = () => {
 
   return (
     <div className="h-screen flex flex-col items-center justify-center bg-gray-100">
-      <div className="w-full bg-blue-600 py-4 text-center text-white">
-        <p>Navbargoeshere</p>
-      </div>
 
       <div className="flex flex-col items-center mt-10">
         <button

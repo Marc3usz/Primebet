@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 @layer base {
-    @font-face {
-      font-family: 'San Francisco';
-      font-style: normal;
-      font-weight: 400;
-      font-display: swap;
-      src: url(../public/sanfranciscodisplay-regular-webfont.woff2) format('woff2');
-    }
+  @font-face {
+    font-family: 'San Francisco';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(../public/sanfranciscodisplay-regular-webfont.woff2) format('woff2');
   }
+}

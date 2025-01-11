@@ -1,9 +1,9 @@
 import React, {useEffect} from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { userData, UserData } from '../stores/store';
+import { userData } from '../stores/store';
 import { Modals } from '../constants/modals';
 
-const LoginPage: React.FC = () => {
+export const LoginPage: React.FC = () => {
     const [searchParams] = useSearchParams();
     const { modal, setModal } = userData();
 
@@ -83,5 +83,3 @@ const LoginPage: React.FC = () => {
         </div>
     );
 };
-
-export default LoginPage;

@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Links } from "../constants/links";
 import { Homepage } from "../pages/Homepage";
-import {}
+import { LoginPage } from "../pages/LoginPage";
 const Placeholder = () => <h1>PlaceHolder</h1>;
 const MyBets = Placeholder;
 const Offers = Placeholder;
@@ -23,7 +23,7 @@ const router = createBrowserRouter([
   },
   {
     path: Links.LOGIN,
-    element: <Login />,
+    element: <LoginPage />,
   },
 ]);
 

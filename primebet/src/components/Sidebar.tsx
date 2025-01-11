@@ -5,7 +5,7 @@ export const Sidebar = () => {
 
 
     return <div className={(expanded?"w-1/6":"w-[8%]") + " bg-slate-700 transition-all flex justify-start flex-col"}>
-        <button onClick={() => setExpanded((state) => !state)} className="bg-slate-600 m-1 rounded-sm">
+        <button onClick={() => setExpanded((state) => !state)} className="bg-slate-600 m-1 rounded-md text-slate-100">
             {expanded?"Hide Bets":"Recommended"}
         </button>
     </div>

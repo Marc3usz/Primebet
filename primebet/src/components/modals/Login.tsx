@@ -1,22 +1,18 @@
 import React from "react";
 
-interface RegisterProps {
+interface LoginProps {
   closeModal: () => void;
 }
 
-const Register: React.FC<RegisterProps> = ({ closeModal }) => {
+const Login: React.FC<LoginProps> = ({ closeModal }) => {
   return (
     <div className="modal-backdrop">
       <div className="modal-content">
         <button onClick={closeModal} className="modal-close">
           &times;
         </button>
-        <h2>Register</h2>
+        <h2>Login</h2>
         <form>
-          <label>
-            Name:
-            <input type="text" placeholder="Enter your name" required />
-          </label>
           <label>
             Email:
             <input type="email" placeholder="Enter your email" required />
@@ -25,11 +21,23 @@ const Register: React.FC<RegisterProps> = ({ closeModal }) => {
             Password:
             <input type="password" placeholder="Enter your password" required />
           </label>
-          <button type="submit">Register</button>
+          <button type="submit">Login</button>
         </form>
+        <p>
+          Don't have an account?{" "}
+          <a href="/login?modal=register" onClick={(e) => e.preventDefault()}>
+            Register
+          </a>
+        </p>
+        <p>
+          Forgot your password?{" "}
+          <a href="/login?modal=forgotpass" onClick={(e) => e.preventDefault()}>
+            Reset it
+          </a>
+        </p>
       </div>
     </div>
   );
 };
 
-export default Register;
+export default Login;

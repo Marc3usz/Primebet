@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { userData } from "../stores/store";
 import { Modals } from "../constants/modals";
+import Login from "../components/modals/Login";
 import Register from "../components/modals/Register";
 import ForgotPass from "../components/modals/ForgotPass";
 
@@ -19,40 +20,63 @@ export const LoginPage: React.FC = () => {
   }, [searchParams, setModal]);
 
   return (
-    <div className="login-page">
-      <div className="login-container">
-        <h1>Login</h1>
-        {modal === Modals.NONE && (
-          <form className="login-form">
-            <label>
-              Email:
-              <input type="email" placeholder="Enter your email" required />
-            </label>
-            <label>
-              Password:
-              <input type="password" placeholder="Enter your password" required />
-            </label>
-            <button type="submit">Login</button>
-          </form>
-        )}
-
-        {modal === Modals.REGISTER && <Register />}
-
-        {modal === Modals.FORGOTPASS && <ForgotPass />}
-
-        <div className="login-footer">
-          {modal !== Modals.REGISTER && (
-            <p>
-              Don't have an account? <a href="/login?modal=register">Register</a>
-            </p>
-          )}
-          {modal !== Modals.FORGOTPASS && (
-            <p>
-              Forgot your password? <a href="/login?modal=forgotpass">Reset it</a>
-            </p>
-          )}
-        </div>
+    <div className="h-screen flex flex-col items-center justify-center bg-gray-100">
+      <div className="w-full bg-blue-600 py-4 text-center text-white">
+        <p>Navbargoeshere</p>
       </div>
+
+      <div className="flex flex-col items-center mt-10">
+        <button
+          onClick={() => setModal(Modals.LOGIN)}
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Login
+        </button>
+      </div>
+
+      {modal === Modals.LOGIN && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white rounded-lg shadow-lg p-6 max-w-md w-full">
+            <button
+              onClick={() => setModal(Modals.NONE)}
+              className="text-gray-500 hover:text-black float-right"
+            >
+              &times;
+            </button>
+            <Login closeModal={() => setModal(Modals.NONE)} />
+          </div>
+        </div>
+      )}
+
+      {modal === Modals.REGISTER && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white rounded-lg shadow-lg p-6 max-w-md w-full">
+            <button
+              onClick={() => setModal(Modals.NONE)}
+              className="text-gray-500 hover:text-black float-right"
+            >
+              &times;
+            </button>
+            <Register closeModal={() => setModal(Modals.NONE)} />
+          </div>
+        </div>
+      )}
+
+      {modal === Modals.FORGOTPASS && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white rounded-lg shadow-lg p-6 max-w-md w-full">
+            <button
+              onClick={() => setModal(Modals.NONE)}
+              className="text-gray-500 hover:text-black float-right"
+            >
+              &times;
+            </button>
+            <ForgotPass closeModal={() => setModal(Modals.NONE)} />
+          </div>
+        </div>
+      )}
     </div>
   );
 };
+
+export default LoginPage;

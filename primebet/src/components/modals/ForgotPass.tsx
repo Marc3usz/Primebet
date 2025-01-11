@@ -1,10 +1,6 @@
 import React from "react";
-import { userData } from "../../stores/store";
-import { Modals } from "../../constants/modals";
 
 const ForgotPass: React.FC = () => {
-  const { setModal } = userData();
-
   return (
     <div className="p-6">
       <h2 className="text-2xl font-bold mb-6 text-center">Forgot Password</h2>
@@ -25,17 +21,6 @@ const ForgotPass: React.FC = () => {
           Reset Password
         </button>
       </form>
-      <div className="text-center mt-4">
-        <p>
-          Remembered your password?{" "}
-          <button
-            className="text-blue-400 hover:underline"
-            onClick={() => setModal(Modals.LOGIN)}
-          >
-            Login
-          </button>
-        </p>
-      </div>
     </div>
   );
 };

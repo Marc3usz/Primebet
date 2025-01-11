@@ -1,10 +1,6 @@
 import React from "react";
-import { userData } from "../../stores/store";
-import { Modals } from "../../constants/modals";
 
 const Register: React.FC = () => {
-  const { setModal } = userData();
-
   return (
     <div className="p-6">
       <h2 className="text-2xl font-bold mb-6 text-center">Register</h2>
@@ -34,17 +30,6 @@ const Register: React.FC = () => {
           Register
         </button>
       </form>
-      <div className="text-center mt-4">
-        <p>
-          Already have an account?{" "}
-          <button
-            className="text-blue-400 hover:underline"
-            onClick={() => setModal(Modals.LOGIN)}
-          >
-            Login
-          </button>
-        </p>
-      </div>
     </div>
   );
 };

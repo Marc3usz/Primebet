@@ -25,8 +25,8 @@ export const Navbar = () => {
     }, [liveUserData]);
 
     return (
-        <div className="h-[10%] bg-slate-800 flex text-slate-100 justify-end align-middle flex-row">
-            <div className="flex w-[80%] flex-row justify-evenly align-middle h-fit">
+        <div className="h-[10%] bg-slate-800 flex text-slate-100 justify-end items-center flex-row">
+            <div className="flex w-[80%] flex-row justify-evenly items-center h-full">
                 {/* <Logo /> */}
                 <button onClick={() => nav(Links.HOMEPAGE)} className="bg-slate-700 rounded-md h-fit p-2 w-fit">Home</button>
                 <button onClick={() => nav(Links.BETS)} className="bg-slate-700 rounded-md h-fit p-2 w-fit">My Bets</button>

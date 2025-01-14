@@ -3,12 +3,16 @@ import { auth } from "../../firebase/firebase.config";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { Links } from "../../constants/links";
+import TOS from "./TOS";
 
 const Register: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
+  const [acceptTOS, setAcceptTOS] = useState(false);
+  const [isTOSOpen, setIsTOSOpen] = useState(false);
+
   const nav = useNavigate();
 
   const handleRegister = async (e: React.FormEvent) => {
@@ -51,15 +55,41 @@ const Register: React.FC = () => {
             required
           />
         </div>
+        <div>
+          <label className="flex items-center text-sm">
+            <input
+              type="checkbox"
+              className="mr-2"
+              checked={acceptTOS}
+              onChange={(e) => setAcceptTOS(e.target.checked)}
+            />
+            Akceptuję{" "}
+            <span
+              className="text-blue-500 underline cursor-pointer ml-1"
+              onClick={() => setIsTOSOpen(true)}
+            >
+              regulamin
+            </span>
+          </label>
+        </div>
         {error && <p className="text-red-500 text-sm">{error}</p>}
-        {success && <p className="text-green-500 text-sm">Registration successful!</p>}
+        {success && (
+          <p className="text-green-500 text-sm">Registration successful!</p>
+        )}
         <button
           type="submit"
-          className="w-full py-2 bg-blue-600 hover:bg-blue-700 rounded text-white font-bold"
+          className={`w-full py-2 rounded text-white font-bold ${
+            acceptTOS
+              ? "bg-blue-600 hover:bg-blue-700"
+              : "bg-gray-400 cursor-not-allowed"
+          }`}
+          disabled={!acceptTOS}
         >
           Register
         </button>
       </form>
+
+      {isTOSOpen && <TOS onClose={() => setIsTOSOpen(false)} />}
     </div>
   );
 };

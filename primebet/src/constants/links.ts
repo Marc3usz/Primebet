@@ -6,4 +6,5 @@ export const Links = {
     SETTINGS: "/settings",
     BETS: "/bets:settled",
     OFFERS: "/offers:filter",
+    TOS: "login?modal=registerTOS"
 }

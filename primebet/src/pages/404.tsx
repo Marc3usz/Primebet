@@ -2,7 +2,7 @@ import { Navbar } from "../components/Navbar"
 import { useLocation } from "react-router-dom"
 import { ScrollbarTailwindStyle } from "../constants/Scrollstyle";
 import { useLottie } from "lottie-react";
-import error404animation from '../../public/404.json'
+import error404animation from '../assets/404.json'
 
 export const Error404 = () => {
 
@@ -11,6 +11,8 @@ export const Error404 = () => {
     const {View} = useLottie({
         loop: true,
         animationData: error404animation,
+    }, {
+        height: "70vh"
     });
 
     return <div className={`w-full h-[90.9%] ${ScrollbarTailwindStyle}`}>

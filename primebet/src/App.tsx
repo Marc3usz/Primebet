@@ -1,4 +1,5 @@
 import { AppRouter } from './routing/router'
+import './index.css'
 
 function App() {
 

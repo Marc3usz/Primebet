@@ -123,7 +123,7 @@ const TOS: React.FC<TOSProps> = ({ onClose }) => {
           <p className="mt-2">
             8.1. W przypadku pytań lub problemów Użytkownik może skontaktować
             się z działem obsługi klienta za pośrednictwem adresu e-mail:
-            support@primebet.com lub czatu dostępnego na Stronie.
+            <s> support@primebet.com</s> lub czatu dostępnego na Stronie.
           </p>
 
           <p className="mt-4">

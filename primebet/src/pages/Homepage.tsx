@@ -6,6 +6,7 @@ import { Navbar } from "../components/Navbar";
 import { Sidebar } from "../components/Sidebar";
 import { Betslip } from "../components/modals/Betslip";
 import { useNavigate } from "react-router-dom";
+import { ScrollbarTailwindStyle } from "../constants/Scrollstyle";
 
 const PLACEHOLDER = () => {
     const liveUserData = useStore(userData);
@@ -46,7 +47,7 @@ export const Homepage = () => {
     };
 
     return (
-        <div className="w-full h-full">
+        <div className={`w-full h-full ${ScrollbarTailwindStyle}`}>
             <Navbar />
             <div className="flex flex-row w-full h-[90%]">
                 <Sidebar />

@@ -10,6 +10,9 @@ export interface UserData {
     setLoggedIn: (loggedIn: boolean) => void;
     user?: User;
     setUser: (user?: User) => void;
+    betslip: unknown[] | null;
+    emptyBetslip: () => void;
+    appendBetslip: (newBet: unknown) => void;
 }
 
 export const userData = create<UserData>()(
@@ -22,6 +25,9 @@ export const userData = create<UserData>()(
                 set({ ...get(), loggedIn: loggedIn }),
             user: undefined,
             setUser: (user?: User) => set({ ...get(), user: user }),
+            betslip: null,
+            emptyBetslip: () => set({...get(), betslip: null}),
+            appendBetslip: (newBet: unknown) => set({...get(), betslip: [...(get().betslip ?? []), newBet]}),
         }),
         {
             name: "PRIMEBET::USER-DATA",

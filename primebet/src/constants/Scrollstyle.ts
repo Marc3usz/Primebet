@@ -1,4 +1,5 @@
 export const ScrollbarTailwindStyle: string = `
+overflow-y-auto 
 [&::-webkit-scrollbar]:w-2
 [&::-webkit-scrollbar-track]:bg-gray-100
 [&::-webkit-scrollbar-thumb]:bg-gray-300

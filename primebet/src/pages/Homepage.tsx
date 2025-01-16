@@ -15,7 +15,7 @@ const PLACEHOLDER = () => {
                 onClick={() =>
                     liveUserData.appendBetslip({
                         title: "FC Barcelona vs Real Madrid",
-                        datetime: new Date(),
+                        date: (Date.now()),
                         odds: 1,
                         desc: "FC Barcelona 4.5+ goals",
                     })

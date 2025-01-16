@@ -15,7 +15,7 @@ export const Error404 = () => {
         height: "70vh"
     });
 
-    return <div className={`w-full h-[90.9%] ${ScrollbarTailwindStyle}`}>
+    return <div className={`w-full h-full ${ScrollbarTailwindStyle}`}>
         <Navbar />
         <div className="bg-slate-600 w-full h-full text-slate-100 flex items-center justify-center flex-col">
             {View}

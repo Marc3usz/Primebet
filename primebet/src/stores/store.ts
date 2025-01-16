@@ -1,8 +1,7 @@
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 import { Modals } from "../constants/modals";
-import { User, UserCredential } from "firebase/auth";
-import { Betslip } from "../components/modals/Betslip";
+import { User } from "firebase/auth";
 
 export interface UserData {
     modal: Modals;
@@ -11,9 +10,16 @@ export interface UserData {
     setLoggedIn: (loggedIn: boolean) => void;
     user?: User;
     setUser: (user?: User) => void;
-    betslip: unknown[] | null;
+    betslip: Bet[] | null;
     emptyBetslip: () => void;
-    appendBetslip: (newBet: unknown) => void;
+    appendBetslip: (newBet: Bet) => void;
+}
+
+export type Bet = {
+    title: string;
+    desc: string;
+    date: number;
+    odds: number;
 }
 
 export const userData = create<UserData>()(
@@ -27,8 +33,8 @@ export const userData = create<UserData>()(
             user: undefined,
             setUser: (user?: User) => set({ ...get(), user: user }),
             betslip: null,
-            emptyBetslip: () => set({ ...get(), betslip: null, betslipKey: 0 }),
-            appendBetslip: (newBet: unknown) =>
+            emptyBetslip: () => set({ ...get(), betslip: null }),
+            appendBetslip: (newBet: Bet) =>
                 set({ ...get(), betslip: [...(get().betslip ?? []), newBet] }),
         }),
         {

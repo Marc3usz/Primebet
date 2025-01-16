@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
+import { getFunctions, httpsCallable } from "firebase/functions";
 
 const firebaseConfig = {
     apiKey: import.meta.env.VITE_FIREBASE_APIKEY,
@@ -8,9 +9,11 @@ const firebaseConfig = {
     projectId: import.meta.env.VITE_FIREBASE_PROJECTID,
     storageBucket: import.meta.env.VITE_FIREBASE_STORAGEBUCKET,
     messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGINGSENDERID,
-    appId: import.meta.env.VITE_FIREBASE_APPID
-}
+    appId: import.meta.env.VITE_FIREBASE_APPID,
+};
 
 const app = initializeApp(firebaseConfig);
-export const db = getFirestore(app)
-export const auth = getAuth(app)
+export const db = getFirestore(app);
+export const auth = getAuth(app);
+const functions = getFunctions(app);
+export const getMarket = httpsCallable(functions, "fetchBookmakerOdds");

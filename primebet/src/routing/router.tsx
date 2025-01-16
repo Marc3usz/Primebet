@@ -9,9 +9,9 @@ import { auth } from "../firebase/firebase.config";
 import { useEffect } from "react";
 import { Error404 } from "../pages/404";
 import { RedirectPage } from "../pages/RedirectPage";
+import { Offers } from "../components/Offers";
 const Placeholder = () => <h1>PlaceHolder</h1>;
 const MyBets = Placeholder;
-const Offers = Placeholder;
 
 const router = createBrowserRouter([
     {

@@ -33,13 +33,15 @@ export const LoginPage: React.FC = () => {
     setError("");
 
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
 
       setLoggedIn(true);
 
-      nav(Links.HOMEPAGE);
+      console.log("User logged in:", userCredential.user);
+
+      nav(Links.REDIRECT);
     } catch (err) {
-      console.error("Login failed:", err);
+      console.error("Login error:", err);
       setError("Failed to log in. Please check your email and password.");
     }
   };

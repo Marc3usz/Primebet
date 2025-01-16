@@ -8,6 +8,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebase/firebase.config";
 import { useEffect } from "react";
 import { Error404 } from "../pages/404";
+import { RedirectPage } from "../pages/RedirectPage";
 const Placeholder = () => <h1>PlaceHolder</h1>;
 const MyBets = Placeholder;
 const Offers = Placeholder;
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
     {
         path: Links.LOGIN,
         element: <LoginPage />,
+    },
+    {
+        path: Links.REDIRECT,
+        element: <RedirectPage />,
     },
 ]);
 

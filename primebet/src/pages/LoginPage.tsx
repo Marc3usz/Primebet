@@ -10,7 +10,7 @@ import { Links } from "../constants/links";
 
 export const LoginPage: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const { modal, setModal } = userData();
+  const { modal, setModal, setLoggedIn } = userData();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -31,11 +31,15 @@ export const LoginPage: React.FC = () => {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
+
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      alert("Logged in successfully!");
+
+      setLoggedIn(true);
+
       nav(Links.HOMEPAGE);
     } catch (err) {
+      console.error("Login failed:", err);
       setError("Failed to log in. Please check your email and password.");
     }
   };

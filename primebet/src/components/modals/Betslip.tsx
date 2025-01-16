@@ -12,22 +12,31 @@ export const Betslip = ({
             <div className="flex justify-between items-center mb-2 flex-row">
                 <h3 className="text-lg font-semibold text-white">Betslip</h3>
                 <div className="w-fit flex gap-3">
-                {
-                    isVisible || <button onClick={clearBetslip} className="text-white hover:text-slate-300">X</button>
-                }
-                <button
-                    onClick={onClose}
-                    className="text-white hover:text-slate-300"
-                >
-                    {isVisible ? "⮝" : "⮟"}
-                </button>
+                    <button
+                        onClick={clearBetslip}
+                        className="text-white hover:text-slate-300"
+                    >
+                        X
+                    </button>
+
+                    <button
+                        onClick={onClose}
+                        className="text-white hover:text-slate-300"
+                    >
+                        {isVisible ? "⮝" : "⮟"}
+                    </button>
                 </div>
             </div>
-            <div className={(isVisible ? "h-0" : "h-[70vh]") + " transition-all overflow-hidden flex"}>
-            <p className="text-sm text-white">
-                This is a modal located in the bottom-right corner of the page.
-
-            </p>
+            <div
+                className={
+                    (isVisible ? "h-0" : "h-[70vh]") +
+                    " transition-all overflow-hidden flex"
+                }
+            >
+                <p className="text-sm text-white">
+                    This is a modal located in the bottom-right corner of the
+                    page.
+                </p>
             </div>
         </div>
     );

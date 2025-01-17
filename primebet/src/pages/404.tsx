@@ -15,9 +15,9 @@ export const Error404 = () => {
         height: "70vh"
     });
 
-    return <div className={`w-full h-full ${ScrollbarTailwindStyle}`}>
+    return <div className="w-full h-full pb-20">
         <Navbar />
-        <div className="bg-slate-600 w-full h-full text-slate-100 flex items-center justify-center flex-col">
+        <div className="bg-slate-600 w-full h-full text-slate-100 flex items-center justify-center flex-col-reverse">
             {View}
             <br />
             <p className="text-3xl">Path `{pathname}` is not handled by our application</p>

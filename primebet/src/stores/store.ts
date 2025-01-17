@@ -13,6 +13,8 @@ export interface UserData {
     betslip: Bet[] | null;
     emptyBetslip: () => void;
     appendBetslip: (newBet: Bet) => void;
+    credits: number;
+    setCredits: (newCredits: number) => void;
 }
 
 export type Bet = {
@@ -36,6 +38,8 @@ export const userData = create<UserData>()(
             emptyBetslip: () => set({ ...get(), betslip: null }),
             appendBetslip: (newBet: Bet) =>
                 set({ ...get(), betslip: [...(get().betslip ?? []), newBet] }),
+            credits: 0,
+            setCredits: (newCredits: number) => set({...get(), credits: newCredits})
         }),
         {
             name: "PRIMEBET::USER-DATA",

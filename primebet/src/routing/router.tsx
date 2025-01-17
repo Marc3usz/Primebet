@@ -43,6 +43,7 @@ export const AppRouter = () => {
     const liveUserData = useStore(userData);
 
     useEffect(() => {
+        
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user && !liveUserData.loggedIn) {
                 liveUserData.setLoggedIn(true);
@@ -53,7 +54,7 @@ export const AppRouter = () => {
             }
         });
         return () => unsubscribe();
-    }, [auth, liveUserData]);
+    }, [auth, liveUserData.user]);
 
     return <RouterProvider router={router} />;
 };

@@ -62,7 +62,7 @@ export const LoginPage: React.FC = () => {
   };
 
   return (
-    <div className="h-screen flex flex-col items-center justify-center bg-gray-900 text-white">
+    <div className="h-screen flex flex-col items-center justify-center bg-gray-900 text-white w-full">
       <div className="p-6 bg-gray-800 rounded-lg shadow-lg w-[400px]">
         <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
         <form className="flex flex-col gap-4" onSubmit={handleLogin}>

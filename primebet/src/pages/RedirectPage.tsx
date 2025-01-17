@@ -14,7 +14,7 @@ export const RedirectPage: React.FC = () => {
   }, [navigate]);
 
   return (
-    <div className="h-screen flex flex-col items-center justify-center bg-gray-900 text-white">
+    <div className="h-screen flex flex-col items-center justify-center bg-gray-900 text-white w-full">
       <h1 className="text-2xl font-bold">Redirecting to main page...</h1>
       <p className="text-gray-400 mt-2">Please wait a moment.</p>
     </div>

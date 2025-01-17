@@ -51,7 +51,6 @@ export const Homepage = () => {
             <Navbar />
             <div className="flex flex-row w-full h-full">
                 <Sidebar />
-                <PLACEHOLDER />
                 <Outlet />
             </div>
             {!!!liveUserData.betslip || (

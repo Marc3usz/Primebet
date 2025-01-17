@@ -3,7 +3,7 @@ import Logo888 from "../images/888sport-logo.png";
 
 export const Footer: React.FC = () => {
     return (
-        <footer className="bg-slate-800 border-slate-800 border-t-2 py-4 text-center flex flex-row justify-center items-center h-fit gap-10">
+        <footer className="bg-slate-800 border-slate-800 border-5-2 py-4 text-center flex flex-row justify-center items-center h-fit gap-10">
             <div className="mb-0">
                 <img
                     src={Logo888}

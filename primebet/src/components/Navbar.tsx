@@ -60,7 +60,7 @@ export const Navbar = () => {
                 </button>
                 {liveUserData.loggedIn ? (
                     <span className="ml-4 text-sm text-gray-300">
-                        credits: {credits}
+                        credits: {liveUserData.credits}
                     </span>
                 ) : (
                     <span className="ml-4 text-sm text-gray-300">

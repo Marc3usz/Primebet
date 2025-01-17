@@ -7,7 +7,6 @@ import {fetchUserData} from "./firebase/userdataFetcher"
 
 function App() {
   useEffect(() => {
-    fetchUserData()
   }, [])
     return (
         <div

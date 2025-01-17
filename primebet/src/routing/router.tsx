@@ -11,6 +11,7 @@ import { Error404 } from "../pages/404";
 import { RedirectPage } from "../pages/RedirectPage";
 import { Offers } from "../components/Offers";
 import MyBets from "../components/MyBets";
+import { fetchUserData } from "../firebase/userdataFetcher";
 
 const router = createBrowserRouter([
     {
@@ -50,6 +51,7 @@ export const AppRouter = () => {
                 liveUserData.setLoggedIn(false);
                 liveUserData.setUser(user ?? undefined);
             }
+            fetchUserData().then(data => data?.credits != liveUserData.credits ? liveUserData.setCredits(data?.credits ?? 0) : () => {})
         });
         return () => unsubscribe();
     }, [auth, liveUserData.user]);

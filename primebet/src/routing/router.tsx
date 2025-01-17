@@ -10,8 +10,7 @@ import { useEffect } from "react";
 import { Error404 } from "../pages/404";
 import { RedirectPage } from "../pages/RedirectPage";
 import { Offers } from "../components/Offers";
-const Placeholder = () => <h1>PlaceHolder</h1>;
-const MyBets = Placeholder;
+import MyBets from "../components/MyBets";
 
 const router = createBrowserRouter([
     {
@@ -27,7 +26,7 @@ const router = createBrowserRouter([
                 element: <Offers />,
             },
         ],
-        errorElement: <Error404 />
+        errorElement: <Error404 />,
     },
     {
         path: Links.LOGIN,
@@ -43,7 +42,6 @@ export const AppRouter = () => {
     const liveUserData = useStore(userData);
 
     useEffect(() => {
-        
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user && !liveUserData.loggedIn) {
                 liveUserData.setLoggedIn(true);

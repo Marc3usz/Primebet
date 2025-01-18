@@ -39,7 +39,8 @@ export const userData = create<UserData>()(
             appendBetslip: (newBet: Bet) =>
                 set({ ...get(), betslip: [...(get().betslip ?? []), newBet] }),
             credits: 0,
-            setCredits: (newCredits: number) => set({...get(), credits: newCredits})
+            setCredits: (newCredits: number) =>
+                set({ ...get(), credits: newCredits }),
         }),
         {
             name: "PRIMEBET::USER-DATA",

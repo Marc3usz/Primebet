@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { auth } from "../../firebase/firebase.config";
 import { sendPasswordResetEmail } from "firebase/auth";
-
+import { showAlert } from "./CustomAlert";
+// modal na reset hasla (akurat faktycznie dziala, tylko ze trzeba prawdziwego maila wpisac)
 const ForgotPass: React.FC = () => {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
@@ -15,8 +16,9 @@ const ForgotPass: React.FC = () => {
     try {
       await sendPasswordResetEmail(auth, email);
       setSuccess(true);
+      await showAlert(true, "Password reset successfully!")
     } catch (err: any) {
-      setError(err.message || "Failed to send reset email. Please try again.");
+      err.message ? setError(err.message) : showAlert(false, "Unknown error, please retry");
     }
   };
 

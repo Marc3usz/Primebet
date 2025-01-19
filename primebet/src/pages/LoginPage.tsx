@@ -7,9 +7,10 @@ import ForgotPass from "../components/modals/ForgotPass";
 import { auth } from "../firebase/firebase.config";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { Links } from "../constants/links";
-
+import { showAlert } from "../components/modals/CustomAlert";
+// logowanie po prostu
 export const LoginPage: React.FC = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams(); // gdzies musielismy to zrobic, wiec modale dodalismy
   const { modal, setModal, setLoggedIn } = userData();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [email, setEmail] = useState("");
@@ -33,15 +34,12 @@ export const LoginPage: React.FC = () => {
     setError("");
 
     try {
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      await signInWithEmailAndPassword(auth, email, password);
 
       setLoggedIn(true);
-
-      console.log("User logged in:", userCredential.user);
-
+      await showAlert(true, "Logged in successfully!")
       nav(Links.REDIRECT);
     } catch (err) {
-      console.error("Login error:", err);
       setError("Failed to log in. Please check your email and password.");
     }
   };
@@ -62,8 +60,8 @@ export const LoginPage: React.FC = () => {
   };
 
   return (
-    <div className="h-screen flex flex-col items-center justify-center bg-gray-900 text-white w-full">
-      <div className="p-6 bg-gray-800 rounded-lg shadow-lg w-[400px]">
+    <div className="h-screen flex flex-col items-center justify-center bg-gray-900 text-white w-full px-4">
+      <div className="p-6 bg-gray-800 rounded-lg shadow-lg w-full max-w-md">
         <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
         <form className="flex flex-col gap-4" onSubmit={handleLogin}>
           <div>
@@ -116,11 +114,11 @@ export const LoginPage: React.FC = () => {
           </p>
         </div>
       </div>
-
+{/* modal handling */}
       {isModalVisible && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 transition-opacity duration-300">
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
           <div
-            className={`relative bg-gray-800 text-white rounded-lg shadow-lg w-[400px] transition-transform duration-300 ${
+            className={`relative bg-gray-800 text-white rounded-lg shadow-lg w-full max-w-md transition-transform duration-300 ${
               isModalVisible ? "scale-100" : "scale-90"
             }`}
           >
@@ -138,5 +136,3 @@ export const LoginPage: React.FC = () => {
     </div>
   );
 };
-
-export default LoginPage;

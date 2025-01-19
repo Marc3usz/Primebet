@@ -12,7 +12,8 @@ import { RedirectPage } from "../pages/RedirectPage";
 import { Offers } from "../components/Offers";
 import MyBets from "../components/MyBets";
 import { fetchUserData } from "../firebase/userdataFetcher";
-
+import { Default } from "../components/Default";
+// router
 const router = createBrowserRouter([
     {
         path: Links.HOMEPAGE,
@@ -20,7 +21,7 @@ const router = createBrowserRouter([
         children: [
             {
                 index: true,
-                element: <h1 className="text-white">Default</h1>
+                element: <Default />
             },
             {
                 path: Links.BETS,
@@ -42,7 +43,7 @@ const router = createBrowserRouter([
         element: <RedirectPage />,
     },
 ]);
-
+// exportujemy AppRouter razem z handlingiem stanu zalogowania, niestety nie wszedzie pisalismy uzywajac stanu ze store'a
 export const AppRouter = () => {
     const liveUserData = useStore(userData);
 

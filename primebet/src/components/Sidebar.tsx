@@ -1,18 +1,17 @@
 import { useState } from "react";
 
-export const Sidebar = ({ children } : {children : React.CElement<any, any>}) => {
+export const Sidebar = ({ children } : {children : React.CElement<any, any>[] | React.CElement<any, any>}) => {
     const [expanded, setExpanded] = useState(false);
 
     return (
         <div className="relative">
-            {/* Sidebar Bump */}
+            {/* Sidebar Bump, czyli ten przycisk z boku szary */}
             <div
                 onClick={() => setExpanded((state) => !state)}
                 className={`fixed top-1/2 -translate-y-1/2 left-0 bg-slate-600 w-3 h-24 rounded-r-md cursor-pointer z-20 transition-transform ${
                     expanded ? "-translate-x-full" : "translate-x-0"
                 }`}
             >
-                {/* Optional Icon/Text on the bump */}
             </div>
 
             {/* Sidebar Content */}
@@ -27,7 +26,7 @@ export const Sidebar = ({ children } : {children : React.CElement<any, any>}) =>
                 >
                     Close
                 </button>
-                <div className="p-4 h-full overflow-y-auto">{children}</div>
+                <div className="p-4 h-full overflow-y-auto flex flex-col">{children}</div>
             </div>
         </div>
     );

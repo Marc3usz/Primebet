@@ -1,3 +1,5 @@
+// linki i czesciowe link (na filter tylko akurat ale to mozna zmienic w przyszlosci na filtrowanie kupionych betslipow)
+
 export const Links = {
     HOMEPAGE: "/",
     LOGIN: "/login",

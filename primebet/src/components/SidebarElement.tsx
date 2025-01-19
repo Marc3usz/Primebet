@@ -10,13 +10,13 @@ export const SidebarElement = ({
     const navigate = useNavigate();
 
     const handleClick = () => {
-        navigate(targetPath); // Redirect to the target path
+        navigate(targetPath); // Redirect do podanej sciezki
     };
 
     return (
         <button
             onClick={handleClick}
-            className="w-full sm:w-auto mt-4 bg-blue-500 text-white px-6 py-3 rounded-md shadow-md hover:bg-blue-600 transition duration-300"
+            className="w-full sm:w-auto mt-4 bg-slate-600 text-white px-6 py-3 rounded-md shadow-md hover:bg-blue-600 transition duration-300"
         >
             {label}
         </button>

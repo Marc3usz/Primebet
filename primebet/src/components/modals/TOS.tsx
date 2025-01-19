@@ -1,15 +1,16 @@
 import React from "react";
+import { ScrollbarTailwindStyle } from "../../constants/Scrollstyle";
 
 interface TOSProps {
   onClose: () => void;
 }
-
+// modal z tosem (tos pewnie z chatu bo kto by chcial to pisac XD, bardziej jako taki lorem to jest i tak)
 const TOS: React.FC<TOSProps> = ({ onClose }) => {
   return (
     <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center z-50">
       <div className="bg-slate-800 w-full max-w-2xl p-8 rounded-lg shadow-lg relative">
         <h2 className="text-2xl font-bold mb-4 text-center">Regulamin</h2>
-        <div className="overflow-y-auto max-h-[80vh] text-sm leading-6">
+        <div className={`${ScrollbarTailwindStyle} max-h-[80vh] text-sm leading-6`}>
           <p>
             <strong>1. Postanowienia ogólne</strong>
           </p>

@@ -1,3 +1,5 @@
+// nie chcialem ogarniac wlasnej klasy w tailwind wiec zrobilem takie cos xd
+// tak sie raczej nie powinno ale coz mniej kminienia
 export const ScrollbarTailwindStyle: string = `
 overflow-y-auto 
 [&::-webkit-scrollbar]:w-2

@@ -25,7 +25,7 @@ function App() {
             });
             return () => unsubscribe();
         }
-    }, [auth.currentUser, liveUserData]);
+    }, [auth.currentUser]);
 
     const handleAddToBetslip = (bet: Bet) => {
         liveUserData.appendBetslip(bet);

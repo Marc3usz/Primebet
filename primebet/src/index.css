@@ -1,13 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+/*font apple'a ustawilismy 😎 (wyglada niestety bardzo podobnie do defaultowego 😭)*/
 @layer base {
   @font-face {
     font-family: 'San Francisco';
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: url(./assets/sanfranciscodisplay-regular-webfont.woff2) format('woff2');
+    src: url(/primebet/src/assets/sanfranciscodisplay-regular-webfont.woff2) format('woff2');
   }
 }

@@ -3,6 +3,8 @@ import { fetchMap } from "../constants/fetch";
 import { useEffect, useState } from "react";
 import { useStore } from "zustand";
 import { userData, Bet } from "../stores/store";
+import { Empty } from "./Empty";
+import { showAlert } from "./modals/CustomAlert";
 
 const bookmakerPriority = ["betsson", "nordicbet", "sports888"];
 
@@ -12,12 +14,19 @@ export const Offers = () => {
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
     const [loading, setLoading] = useState(true);
     const liveUserData = useStore(userData);
-    const [notification, setNotification] = useState<string | null>(null);
   
     const handleAddToBetslip = (
       game: any,
       outcome: { name: string; price: number }
     ) => {
+      const existingBet = liveUserData.betslip?.find((bet: Bet) => bet.id === game.id);
+    
+      if (existingBet) {
+        showAlert(false, "You may not bet twice on the same game")
+        return;
+      }
+    
+      // Dodajemy bet jezeli jeszcze nie byl dodany
       const bet: Bet = {
         title: game.sport_title,
         desc: `${game.home_team} vs ${game.away_team}`,
@@ -31,14 +40,17 @@ export const Offers = () => {
       liveUserData.appendBetslip(bet);
     };
     
+    
   
     const getTopBookmaker = (bookmakers: any[]) => {
       return bookmakers.find((bookmaker: any) =>
         bookmakerPriority.includes(bookmaker.key)
       );
     };
+    
   
     useEffect(() => {
+      setLoading(true) // nie uzywamy fetch/axios, ale 1) axios jest na backendzie 2) wsumie to i tak sie obsluguje 1:1 praktycznie
       const fetchData = async () => {
         if (!filter) {
           setErrorMessage("No filter provided");
@@ -48,7 +60,8 @@ export const Offers = () => {
   
         try {
           const res = await fetchMap[filter]?.();
-          const filteredResults = res?.data?.filter?.((game: any) =>
+          // @ts-ignore
+          const filteredResults = res?.data?.filter?.((game: any) => // czemu to sie plulo 😭 jak to jest po zapytajniku
             game.bookmakers.some((bookmaker: any) =>
               bookmakerPriority.includes(bookmaker.key)
             )
@@ -65,15 +78,10 @@ export const Offers = () => {
   
       fetchData();
     }, [filter]);
-  
+    console.log(queryResults)
+
     return (
       <div className="h-fit flex flex-col items-center w-full p-4 sm:p-6 lg:p-20">
-  {notification && (
-    <div className="absolute top-8 left-1/2 transform -translate-x-1/2 bg-red-500 text-white px-6 py-3 rounded-md shadow-lg transition-all opacity-100 h-fit">
-      {notification}
-    </div>
-  )}
-
   {loading ? (
     <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-blue-500 text-white px-6 py-3 rounded-md shadow-lg opacity-100">
       Loading Offers...
@@ -88,7 +96,7 @@ export const Offers = () => {
     </h1>
   )}
 
-  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-6xl h-fit">
+  { loading || (queryResults.length !== 0 ? <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-6xl h-fit">
     {queryResults.map((game: any) => {
       const topBookmaker = getTopBookmaker(game.bookmakers);
       if (!topBookmaker) return null;
@@ -96,7 +104,7 @@ export const Offers = () => {
       return (
         <div
           key={game.id}
-          className="bg-slate-600 rounded-lg p-4 shadow-md min-h-fit"
+          className="bg-slate-800 rounded-lg p-4 shadow-md min-h-fit"
         >
           <h3 className="text-white text-lg font-bold">
             {game.sport_title}
@@ -106,9 +114,10 @@ export const Offers = () => {
           </p>
           <p className="text-gray-400">
             Commence Time:{" "}
-            {new Date(game.commence_time).toLocaleString()}
+            {new Date(game.commence_time).toLocaleString() }
           </p>
           <div className="mt-4">
+            {/* powinno byc w osobnym elemencie ale max chyba mial lekki tunnel vision */}
             {topBookmaker.markets[0].outcomes.map(
               (outcome: any, index: number) => (
                 <button
@@ -126,7 +135,7 @@ export const Offers = () => {
         </div>
       );
     })}
-  </div>
+  </div> : <Empty message="We don't have these yet, but stay tuned!"/>) /* jak nie ma zadnych betow, takie placeholder wyswietla */ } 
 </div>
 
     );

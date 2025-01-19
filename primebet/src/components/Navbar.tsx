@@ -6,6 +6,8 @@ import { signOut } from "firebase/auth";
 import { auth } from "../firebase/firebase.config";
 import Logo2 from "../images/Logo2-rm.png";
 
+// zwykly navbar
+
 export const Navbar = () => {
   const nav = useNavigate();
   const liveUserData = useStore(userData);
@@ -45,7 +47,7 @@ export const Navbar = () => {
       {loginSignout}
     </button>
     {liveUserData.loggedIn ? (
-      <span className="text-xs md:text-sm text-gray-300">
+      <span className="bg-slate-700 hover:bg-slate-600 rounded-full px-3 py-1 text-xs md:px-5 md:py-2 md:text-sm transition-all text-white font-medium">
         credits: {liveUserData.credits}
       </span>
     ) : (

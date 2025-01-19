@@ -15,6 +15,9 @@ export interface UserData {
     appendBetslip: (newBet: Bet) => void;
     credits: number;
     setCredits: (newCredits: number) => void;
+    pollSemaphore: number;
+    induceSemaphorePolling: () => void;
+    setBetslip: (newBetslip: Bet[] | null) => void;
 }
 
 export type Bet = {
@@ -25,12 +28,12 @@ export type Bet = {
     id: string;
     outcome: string;
     bookmaker: string;
-}
+};
 
 export const userData = create<UserData>()(
-    persist(
+    persist( // middleware zeby stan sie zapisywal w localstorage. Dzieki temu przy odswiezaniu np betslip sie nie resetuje
         (set, get) => ({
-            modal: Modals.NONE,
+            modal: Modals.NONE, // szczerze to pewnie moglismy bez tego lol
             setModal: (modal: Modals) => set({ ...get(), modal: modal }),
             loggedIn: false,
             setLoggedIn: (loggedIn: boolean) =>
@@ -44,6 +47,11 @@ export const userData = create<UserData>()(
             credits: 0,
             setCredits: (newCredits: number) =>
                 set({ ...get(), credits: newCredits }),
+            pollSemaphore: 0, // nie wiedzialem jak sie powinno robic refresh z firebase to zrobilem tak. Oczywiscie pozniej wykminilem
+            induceSemaphorePolling: () =>
+                set({ ...get(), pollSemaphore: get().pollSemaphore + 1 }),
+            setBetslip: (newBetslip: Bet[] | null) =>
+                set({ ...get(), betslip: newBetslip }),
         }),
         {
             name: "PRIMEBET::USER-DATA",

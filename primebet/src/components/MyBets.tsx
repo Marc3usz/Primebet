@@ -120,7 +120,9 @@ const MyBets: React.FC = () => {
           {bets.map((bet, index) => (
             <div key={index} className="bg-slate-800 rounded-lg p-4 shadow-md flex flex-col">
               <h2 className="text-lg font-semibold mb-2">
-                Combined Bet (Total Odds: {bet.odds})
+                {bet.games.length > 1
+                  ? `Combined Bet (Total Odds: ${bet.odds})`
+                  : `Single Bet (Total Odds: ${bet.odds})`}
               </h2>
               <div className="text-sm">
                 {bet.games.map((game, gameIndex) => {

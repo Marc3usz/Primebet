@@ -3,6 +3,8 @@ import { fetchMap } from "../constants/fetch";
 import { useEffect, useState } from "react";
 import { useStore } from "zustand";
 import { userData, Bet } from "../stores/store";
+import { collection, addDoc } from "firebase/firestore";
+import { db, auth } from "../firebase/firebase.config";
 
 const bookmakerPriority = ["betsson", "nordicbet", "sports888"];
 
@@ -10,7 +12,9 @@ export const Offers = () => {
   const { filter } = useParams<{ filter: string }>();
   const [queryResults, setQueryResults] = useState<any[]>([]);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
   const liveUserData = useStore(userData);
+  const [notification, setNotification] = useState<string | null>(null);
 
   const handleAddToBetslip = (
     bet: Bet,
@@ -23,6 +27,32 @@ export const Offers = () => {
     });
   };
 
+  const handleSendBetsToFirebase = async () => {
+    if (!auth.currentUser) {
+      setNotification("You must be logged in to send the betslip.");
+      return;
+    }
+
+    try {
+      const userBetsRef = collection(db, `Users/${auth.currentUser.uid}/bets`);
+      const betData = {
+        games: liveUserData.betslip,
+        status: "unsettled",
+        totalOdds: liveUserData.betslip.reduce((acc, bet) => acc * bet.odds, 1),
+        bet_amount: liveUserData.betslip.length * 10,
+      };
+
+      await addDoc(userBetsRef, betData);
+
+      liveUserData.setCredits(liveUserData.credits - betData.bet_amount);
+      liveUserData.emptyBetslip();
+      setNotification("Bets successfully added.");
+    } catch (error) {
+      console.error("Error sending betslip to Firebase:", error);
+      setNotification("An error occurred while sending the betslip.");
+    }
+  };
+
   const getTopBookmaker = (bookmakers: any[]) => {
     return bookmakers.find((bookmaker: any) =>
       bookmakerPriority.includes(bookmaker.key)
@@ -33,6 +63,7 @@ export const Offers = () => {
     const fetchData = async () => {
       if (!filter) {
         setErrorMessage("No filter provided");
+        setLoading(false);
         return;
       }
 
@@ -45,9 +76,11 @@ export const Offers = () => {
         );
 
         setQueryResults(filteredResults || []);
+        setLoading(false);
       } catch (err) {
         console.error("Error fetching offers:", err);
         setErrorMessage("Error: Bets couldn't load");
+        setLoading(false);
       }
     };
 
@@ -56,9 +89,26 @@ export const Offers = () => {
 
   return (
     <div className="w-full h-screen bg-slate-900 text-slate-100 flex flex-col items-center p-4 overflow-y-auto">
-      <h1 className="text-2xl font-bold mb-4 capitalize">
-        {errorMessage ? errorMessage : `${filter} Offers`}
-      </h1>
+      {notification && (
+        <div className="absolute top-8 left-1/2 transform -translate-x-1/2 bg-red-500 text-white px-6 py-3 rounded-md shadow-lg transition-all opacity-100">
+          {notification}
+        </div>
+      )}
+      
+      {loading ? (
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-blue-500 text-white px-6 py-3 rounded-md shadow-lg opacity-100">
+          Loading Offers...
+        </div>
+      ) : errorMessage ? (
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-red-500 text-white px-6 py-3 rounded-md shadow-lg opacity-100">
+          {errorMessage}
+        </div>
+      ) : (
+        <h1 className="text-2xl font-bold mb-4 capitalize">
+          {`${filter} Offers`}
+        </h1>
+      )}
+
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-6xl">
         {queryResults.map((game: any) => {
           const topBookmaker = getTopBookmaker(game.bookmakers);

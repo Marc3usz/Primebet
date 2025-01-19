@@ -22,6 +22,9 @@ export type Bet = {
     desc: string;
     date: number;
     odds: number;
+    id: string;
+    outcome: string;
+    bookmaker: string;
 }
 
 export const userData = create<UserData>()(

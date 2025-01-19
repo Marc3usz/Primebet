@@ -5,38 +5,8 @@ import { Outlet } from "react-router-dom";
 import { Navbar } from "../components/Navbar";
 import { Sidebar } from "../components/Sidebar";
 import { Betslip } from "../components/modals/Betslip";
-import { useNavigate } from "react-router-dom";
-import { ScrollbarTailwindStyle } from "../constants/Scrollstyle";
-
-const PLACEHOLDER = () => {
-    const liveUserData = useStore(userData);
-    const navigate = useNavigate();
-
-    const handleAddBet = () => {
-        if (!liveUserData.loggedIn) {
-            navigate("/login");
-            return;
-        }
-
-        liveUserData.appendBetslip({
-            title: "FC Barcelona vs Real Madrid",
-            date: Date.now(),
-            odds: 1.0,
-            desc: "FC Barcelona 4.5+ goals",
-        });
-    };
-
-    return (
-        <div className="w-fit h-fit">
-            <h1 className="text-base">ADD EXAMPLE BET</h1>
-            <button onClick={handleAddBet} className="bg-blue-500 text-white p-2 rounded">
-                Add Test Bet
-            </button>
-        </div>
-    );
-};
-
-export default PLACEHOLDER;
+import { PartialLinks } from "../constants/links";
+import { SidebarElement } from "../components/SidebarElement";
 
 export const Homepage = () => {
     const liveUserData = useStore(userData);
@@ -47,10 +17,12 @@ export const Homepage = () => {
     };
 
     return (
-        <div className={`w-full h-full`}>
+        <div className={`w-full h-fit`}>
             <Navbar />
-            <div className="flex flex-row w-full h-full">
-                <Sidebar />
+            <div className="flex flex-row w-full h-fit">
+                <Sidebar>
+                    <SidebarElement label={"Recommended Bets"} targetPath={PartialLinks.OFFERS + "recommended"}/>
+                </Sidebar>
                 <Outlet />
             </div>
             {!!!liveUserData.betslip || (

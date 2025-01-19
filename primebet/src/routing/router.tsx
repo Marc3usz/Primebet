@@ -19,6 +19,10 @@ const router = createBrowserRouter([
         element: <Homepage />,
         children: [
             {
+                index: true,
+                element: <h1 className="text-white">Default</h1>
+            },
+            {
                 path: Links.BETS,
                 element: <MyBets />,
             },
@@ -51,7 +55,11 @@ export const AppRouter = () => {
                 liveUserData.setLoggedIn(false);
                 liveUserData.setUser(user ?? undefined);
             }
-            fetchUserData().then(data => data?.credits != liveUserData.credits ? liveUserData.setCredits(data?.credits ?? 0) : () => {})
+            fetchUserData().then((data) =>
+                data?.credits != liveUserData.credits
+                    ? liveUserData.setCredits(data?.credits ?? 0)
+                    : () => {}
+            );
         });
         return () => unsubscribe();
     }, [auth, liveUserData.user]);

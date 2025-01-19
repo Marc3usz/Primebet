@@ -33,10 +33,9 @@ function App() {
     };
 
     return (
-        <div className={`flex flex-col-reverse w-full h-full ${ScrollbarTailwindStyle}`}>
-            <div>
-                <Footer />
-            </div>
+        <div
+            className={`flex flex-col w-full h-fit justify-between bg-slate-700`}
+        >
             <div className="flex h-full min-h-screen">
                 <AppRouter onAddToBetslip={handleAddToBetslip} />
             </div>
@@ -51,6 +50,9 @@ function App() {
                     betslip={liveUserData.betslip || []}
                 />
             )}
+            <div>
+                <Footer />
+            </div>
         </div>
     );
 }

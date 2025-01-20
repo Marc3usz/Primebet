@@ -37,8 +37,8 @@ export const BetslipElement = ({ bet }: { bet: Bet }) => {
       </div>
       <p className="text-white text-xs text-left">{new Date(bet.date).toDateString()}</p>
       <p className="text-slate-400 text-xs text-left">{bet.bookmaker}</p>
-      <span className="w-full h-5 flex flex-row items-end justify-between pb-0 mb-0">
-        <p className="text-sm text-white bg-slate-600 p-1 rounded-md pb-0 rounded-b-none mb-0 mt-2">
+      <span className="w-full h-fit flex flex-row items-end justify-between pb-0 mb-0">
+        <p className="text-sm text-white bg-slate-600 p-1 rounded-md pb-0 rounded-b-none mb-0 mt-2 break-words">
           {bet.outcome}
         </p>
         <p className="text-sm text-white bg-slate-600 p-1 rounded-md pb-0 rounded-b-none mb-0">

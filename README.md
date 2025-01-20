@@ -1,13 +1,17 @@
 # Primebet
 ## UWAGA: TO NIE JEST STRONA OFERUJACA USLUGI BUCHMACHERSKIE JEST TO JEDYNIE MAKIETA BEZ FUNKCJONALNOSCI UDZIALU W GRACH HAZARDOWYCH ZA PIENIĄDZE BĄDŹ INNE ODPOWIEDNIKI JAKICHKOLWIEK WALUT
 
+# Status strony:
+[![Netlify Status](https://api.netlify.com/api/v1/badges/0ce349c8-e1d3-415b-b5d2-de241871402a/deploy-status)](https://app.netlify.com/sites/eclectic-fox-2e13d6/deploys)
+
 # Uruchamianie
-1) Poproś Marcela / Maksa o klucze do firebase (inaczej nie pojdzie) ((Marcel Panu raczej wysłał klucze dostępu na discordzie))
-2) Pobierz repo z githuba używając clone. Wersja zawsze jest aktualna bo pushowaliśmy wyłącznie do mastera 😊
-3) Przejdź w folder, i wykonaj `npm install`
-4) Pozniej, ponownie przejdz do folderu `primebet` komendą `cd ./primebet` zawartego w folderze repo
-5) Wykonaj komende `npm run dev`
-6) wpisz w terminalu `o + enter` lub przejdź do `https://localhost:5137`
+- odpal używając [netlify](https://eclectic-fox-2e13d6.netlify.app/) <br>
+### lub:
+- sklonuj repo (ma pan dostęp)
+- wejdź w folder repo i potem w folder `primebet`
+- odpal `npm install`
+- przeklej zawartość pliku `.env` którą Marcel Panu wysłał
+- potem `npm run dev`
    
 # Użytkowanie
 1) Załóż konto używając zakladki `log in`, gdzie przejdziesz do funkcji `register`
@@ -30,3 +34,4 @@
 - Vite (też lol)
 - Backend: Firebase Cloud Functions (link do repo: [Primebet-Firebase](https://github.com/Marc3usz/Primebet-Firebase/tree/master), ma pan dostęp)
 - API: [the odds api](https://the-odds-api.com/)
+- Hosting: Netlify

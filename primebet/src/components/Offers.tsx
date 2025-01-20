@@ -19,6 +19,7 @@ export const Offers = () => {
       game: any,
       outcome: { name: string; price: number }
     ) => {
+      console.log(game)
       const existingBet = liveUserData.betslip?.find((bet: Bet) => bet.id === game.id);
     
       if (existingBet) {
@@ -35,6 +36,7 @@ export const Offers = () => {
         id: game.id,
         outcome: outcome.name,
         bookmaker: game.bookmakers[0].title,
+        sport_key: game.sport_key,
       };
     
       liveUserData.appendBetslip(bet);

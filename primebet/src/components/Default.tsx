@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchUserData } from "./../firebase/userDataFetcher";
+import { fetchUserData } from "../firebase/userdataFetcher";
 import { Timestamp } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { Links } from "../constants/links";

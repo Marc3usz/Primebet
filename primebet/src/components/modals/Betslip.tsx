@@ -33,6 +33,7 @@ const generateBetSlipJson = (betAmount: number, betslip: Bet[]) => {
             odds: bet.odds,
             prediction: prediction,
             name: bet.desc,
+            sport_key: bet.sport_key,
         };
     });
 

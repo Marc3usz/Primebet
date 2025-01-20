@@ -28,6 +28,7 @@ export const Offers = () => {
       }
     
       // Dodajemy bet jezeli jeszcze nie byl dodany
+      console.log(game)
       const bet: Bet = {
         title: game.sport_title,
         desc: `${game.home_team} vs ${game.away_team}`,
@@ -124,8 +125,9 @@ export const Offers = () => {
               (outcome: any, index: number) => (
                 <button
                   key={index}
-                  onClick={() =>
-                    handleAddToBetslip(game, outcome)
+                  onClick={() =>{
+                    console.log(outcome)
+                    handleAddToBetslip(game, outcome)}
                   }
                   className="mt-2 bg-blue-500 text-white px-4 py-2 rounded mr-2 hover:bg-blue-600"
                 >

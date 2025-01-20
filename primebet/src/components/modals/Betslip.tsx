@@ -15,12 +15,12 @@ const buyBet = httpsCallable(functions, "buyBet");
 
 const generateBetSlipJson = (betAmount: number, betslip: Bet[]) => {
     // generuje jsona dla funkcji
+
     const games = betslip.map((bet) => {
+        console.log(bet)
         let prediction = "";
-        if (bet.outcome === bet.title) {
-            prediction = "home_team";
-        } else if (bet.outcome === bet.desc) {
-            prediction = "away_team";
+        if (bet.desc.split(" vs ").includes(bet.outcome)) {
+            prediction = bet.outcome;
         } else {
             prediction = "draw";
         }
